@@ -1,0 +1,17 @@
+# /etc/systemd/system/kx3-sdrconnect-sync.service
+# Change User and the paths to yours. For the one-way version, run
+# kx3_panadapter_only_sync.py instead.
+[Unit]
+Description=KX3 <-> SDRconnect frequency sync
+After=network.target
+
+[Service]
+Type=simple
+User=youruser
+Environment=SDRCONNECT_DIR=/home/youruser/Rigctl-Server-for-SDRConnect
+ExecStart=/usr/bin/python3 /home/youruser/kx3-sdr-sync/kx3_panadapter_sync.py
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
